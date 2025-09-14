@@ -7,8 +7,8 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const navItems = [
-    { name: 'Contact Us', href: '#contact' },
-    { name: 'Project', href: '#project' },
+    { name: 'Contact', href: '#contact' },
+    { name: 'Projects', href: '#projects' },
     { name: 'About', href: '#about' },
   ];
 

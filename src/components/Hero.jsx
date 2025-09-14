@@ -1,10 +1,12 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiX } from 'react-icons/fi';
 
 // Import the image directly
 import profileImage from '../../public/asset/rakha.png';
 
 const Hero = () => {
+  const [showInfo, setShowInfo] = useState(false);
   const title = "PORTFOLIO 2025".split("");
   const colors = [
     'text-white', 'text-neon-green', 'text-neon-blue', 'text-white', 'text-neon-green',
@@ -31,7 +33,8 @@ const Hero = () => {
         <div className="text-center">
        
           <motion.div 
-            className="relative mx-auto mb-12 w-56 h-64 md:w-72 md:h-80 cursor-grab active:cursor-grabbing"
+            className="relative mx-auto mb-12 w-56 h-64 md:w-72 md:h-80 cursor-pointer"
+            onClick={() => setShowInfo(true)}
             initial={{ opacity: 0, y: 50 }}
             animate={{ 
               opacity: 1, 
@@ -249,6 +252,55 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Personal Info Modal */}
+      <AnimatePresence>
+        {showInfo && (
+          <motion.div 
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowInfo(false)}
+          >
+            <motion.div 
+              className="bg-darker-blue rounded-xl p-8 max-w-md w-full relative border border-emerald-400/30"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                onClick={() => setShowInfo(false)}
+              >
+                <FiX size={24} />
+              </button>
+              
+              <div className="text-center">
+                <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-2 border-emerald-400/50">
+                  <img 
+                    src={profileImage} 
+                    alt="Profile" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Personal Information</h3>
+                <div className="space-y-3 text-left bg-gray-800/50 p-4 rounded-lg">
+                  <div className="flex items-center">
+                    <span className="text-emerald-400 w-24">Tanggal Lahir</span>
+                    <span className="text-gray-300">05-10-2004</span>
+                  </div>
+                  <div className="flex items-start">
+                    <span className="text-emerald-400 w-24 flex-shrink-0">Hobi</span>
+                    <span className="text-gray-300">Game dan Code</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

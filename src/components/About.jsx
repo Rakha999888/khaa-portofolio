@@ -15,9 +15,21 @@ const About = () => {
   ];
 
   const softwareIcons = [
-    { icon: <FiCode className="w-8 h-8" />, name: 'VS Code' },
-    { icon: <FiLayers className="w-8 h-8" />, name: 'Figma' },
-    { icon: <FiMonitor className="w-8 h-8" />, name: 'Canva' },
+    { 
+      icon: <FiCode className="w-8 h-8" />, 
+      name: 'VS Code',
+      url: 'https://code.visualstudio.com/' 
+    },
+    { 
+      icon: <FiLayers className="w-8 h-8" />, 
+      name: 'Figma',
+      url: 'https://www.figma.com/' 
+    },
+    { 
+      icon: <FiMonitor className="w-8 h-8" />, 
+      name: 'Canva',
+      url: 'https://www.canva.com/' 
+    },
   ];
 
   const container = {
@@ -65,7 +77,7 @@ const About = () => {
             </motion.p>
             
             <motion.div variants={item} className="pt-2 sm:pt-4">
-              <h3 className="text-xl font-semibold text-neon-blue mb-3 sm:mb-4">Skills</h3>
+              <h3 className="text-xl font-semibold text-green-300 mb-3 sm:mb-4">Skills</h3>
               <div className="flex flex-wrap gap-2 sm:gap-3">
                 {skills.map((skill, index) => (
                   <motion.span
@@ -85,32 +97,31 @@ const About = () => {
           </motion.div>
           <motion.div variants={item} className="space-y-6 sm:space-y-8">
             <motion.div variants={item} className="glass-effect p-6 sm:p-8 rounded-2xl">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">
+              <h3 className="text-xl sm:text-2xl font-bold text-green-300 mb-3 sm:mb-4">
                 Happiness is actually simple,
               </h3>
-              <p className="text-white/70 text-sm sm:text-base">
+              <p className="text-white text-sm sm:text-base">
                 it's about how we can go through sadness first. 
                 Every challenge we face is a stepping stone to greater happiness and success in life.
               </p>
             </motion.div>
             
             <motion.div variants={item} className="glass-effect p-4 sm:p-6 md:p-8 rounded-2xl">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">
+              <h3 className="text-xl sm:text-2xl font-bold text-green-300 mb-3 sm:mb-4">
                 Tools I Use
               </h3>
               <div className="grid grid-cols-3 gap-4 sm:gap-6">
                 {softwareIcons.map((software, index) => (
-                  <motion.div 
-                    key={index}
-                    className="flex flex-col items-center justify-center space-y-1 sm:space-y-2"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                  <a 
+                    key={index} 
+                    href={software.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center p-4 bg-gray-800/50 rounded-xl hover:bg-gray-700/50 transition-colors hover:text-neon-green"
                   >
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl bg-neon-blue/10 flex items-center justify-center text-neon-blue">
-                      {React.cloneElement(software.icon, { className: 'w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8' })}
-                    </div>
-                    <span className="text-white/80 text-xs sm:text-sm font-medium text-center">{software.name}</span>
-                  </motion.div>
+                    {software.icon}
+                    <span className="mt-2 text-sm text-gray-300">{software.name}</span>
+                  </a>
                 ))}
               </div>
             </motion.div>
